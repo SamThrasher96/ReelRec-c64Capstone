@@ -178,8 +178,10 @@ return (
             />
         </div>
     </fieldset>
-
-
+    <button
+        onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+        className="btn btn-primary"
+        >Submit form</button>
     </form>
-)
+    )
 }
