@@ -5,7 +5,7 @@ import { NewMovieForm } from "../Movies/NewMovieForm"
 export const ApplicationViews = () => {
 	return (
 		<Routes>
-			<Route path="/" element={
+			<Route path="*" element={
 					<>
 						<h1 className="title--main">ReelRec</h1>
 						<div>What are we watching next?</div>
