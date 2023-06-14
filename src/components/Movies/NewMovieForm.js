@@ -118,6 +118,30 @@ return (
             </select>
         </div>
     </fieldset>
+    <fieldset>
+        <div className="form-group">
+            <label htmlFor="streaming-service">Streaming service</label>
+            <select 
+            required autoFocus
+            className="form-control"
+            placeholder="Streaming Service"
+            value={movie.streamingServiceId}
+            onChange={(event) => {
+                const copy = {...movie};
+                copy.streamingServiceId = event.target.value;
+                updateMovie(copy);
+            }}
+            >
+                <option value="" defaultValue>Select a streaming service</option>
+                {streamingService.map(item => (
+                    <option value={item.id} key={item.id}>{item.streamingService}</option>
+                ))}
+            </select>
+        </div>
+    </fieldset>
+
+
+
     </form>
 )
 }
