@@ -160,6 +160,24 @@ return (
             </select>
         </div>
     </fieldset>
+    <fieldset>
+        <div className="form-group">
+            <label htmlFor="description">description</label>
+            <input
+            required
+            autoFocus
+            type="text"
+            className="form-control"
+            placeholder="enter a brief description of the movie"
+            value={movie.description}
+            onChange={(event) => {
+                const copy = {...movie};
+                copy.description = event.target.value;
+                updateMovie(copy);
+            }}
+            />
+        </div>
+    </fieldset>
 
 
     </form>
