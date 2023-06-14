@@ -9,6 +9,9 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/User">User Profile</Link>
             </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/Movies">Add a movie</Link>
+            </li>
             {
                 localStorage.getItem("reelRec_user")
                     ? <li className="navbar__item navbar__logout">
