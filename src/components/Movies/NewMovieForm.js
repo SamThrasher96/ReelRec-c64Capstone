@@ -134,12 +134,32 @@ return (
             >
                 <option value="" defaultValue>Select a streaming service</option>
                 {streamingService.map(item => (
-                    <option value={item.id} key={item.id}>{item.streamingService}</option>
+                    <option value={item.id} key={item.id}>{item.service}</option>
                 ))}
             </select>
         </div>
     </fieldset>
-
+    <fieldset>
+        <div className="form-group">
+            <label htmlFor="mpa-rating">MPA Rating</label>
+            <select 
+            required autoFocus
+            className="form-control"
+            placeholder="MPA Rating"
+            value={movie.mpaRatingId}
+            onChange={(event) => {
+                const copy = {...movie};
+                copy.mpaRatingId = event.target.value;
+                updateMovie(copy);
+            }}
+            >
+                <option value="" defaultValue>Select a rating</option>
+                {mpaRating.map(item => (
+                    <option value={item.id} key={item.id}>{item.mpaRating}</option>
+                ))}
+            </select>
+        </div>
+    </fieldset>
 
 
     </form>
