@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 
-export const newMovieForm = () => {
+export const NewMovieForm = () => {
     const [movie, updateMovie] = useState({
         name: "",
         genreId: 0,
@@ -95,6 +95,27 @@ return (
                 updateMovie(copy);
             }}
             />
+        </div>
+    </fieldset>
+    <fieldset>
+        <div className="form-group">
+            <label htmlFor="genreId">Genre</label>
+            <select
+            required autoFocus
+            className="form-control"
+            placeholder="Genre"
+            value={movie.genreId}
+            onChange={(event) => {
+                const copy = {...movie};
+                copy.genreId = event.target.value;
+                updateMovie(copy);
+            }}
+            >
+                <option value="" defaultValue>Select a genre</option>
+                {movieGenre.map(item => (
+                    <option value={item.id} key={item.id}>{item.genre}</option>
+                ))}
+            </select>
         </div>
     </fieldset>
     </form>
