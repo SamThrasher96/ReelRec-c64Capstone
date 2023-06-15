@@ -18,6 +18,7 @@ export const MovieList =({}) => {
     )
 
     return <>
+    <button onClick={() => navigate("*")}>Home</button>
     <h2>List of movies</h2>
     <article className="movies">
         {
