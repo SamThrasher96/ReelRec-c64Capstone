@@ -17,6 +17,8 @@ export const Login = () => {
                     const user = foundUsers[0]
                     localStorage.setItem("reelRec_user", JSON.stringify({
                         id: user.id,
+                        name: user.name,
+                        email: user.email
                     }))
                     navigate("/")
                 }
