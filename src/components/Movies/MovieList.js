@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./Movie.css"
 
 
 export const MovieList =({}) => {
@@ -13,7 +14,7 @@ export const MovieList =({}) => {
                 .then((movieArray) => {
                     setMovies(movieArray)
                 })
-            console.log("Initial state of tickets", tickets)
+            console.log("Initial state of tickets", )
         }
     )
 
@@ -21,7 +22,7 @@ export const MovieList =({}) => {
     <h2>List of movies</h2>
     <article className="movies">
         {
-            setMovies.map(
+            movies.map(
                 (movie) => {
                     return <section className="movie" key={`movie--${movie.id}`}>
                         <header>Movie title:{movie.name}</header>
