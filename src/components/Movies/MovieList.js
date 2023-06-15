@@ -3,9 +3,19 @@ import { useNavigate } from "react-router-dom"
 import "./movie.css"
 
 
-export const MovieList =({}) => {
+export const MovieList =({ searchTermState }) => {
     const [movies, setMovies] = useState([])
+    const [filteredMovies, setFilteredMovies] = useState([])
     const navigate = useNavigate()
+
+    useEffect(
+        () => {
+            const searchedMovies = movies.filter(movie =>{
+                return movie.name.toLowerCase().startsWith(searchTermState.toLowerCase())
+            })
+            setFilteredMovies(searchedMovies)
+        }
+    )
 
     useEffect(
         () => {
@@ -22,7 +32,7 @@ export const MovieList =({}) => {
     <h2>List of movies</h2>
     <article className="movies">
         {
-            movies.map(
+            filteredMovies.map(
                 (movie) => {
                     return <section className="movie" key={`movie--${movie.id}`}>
                         <header>Movie title:{movie.name}</header>
