@@ -9,12 +9,11 @@ export const MovieList =({}) => {
 
     useEffect(
         () => {
-            fetch(``)
+            fetch(`http://localhost:8088/movies`)
                 .then(response => response.json())
                 .then((movieArray) => {
                     setMovies(movieArray)
                 })
-            console.log("Initial state of tickets", )
         }
     )
 

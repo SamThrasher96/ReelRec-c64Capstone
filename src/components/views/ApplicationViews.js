@@ -15,7 +15,7 @@ export const ApplicationViews = () => {
 			}>
 				<Route path="User" element={ <UserProfile />} />
 				<Route path="Movies" element={ <NewMovieForm />} />
-				<Route path="Movies/list" element={ < MovieList />} />
+				<Route path="Movies/MovieList" element={ < MovieList />} />
 				
 			</Route>
 		</Routes>
