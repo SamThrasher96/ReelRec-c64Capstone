@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "./Movie.css"
+import "./movie.css"
 
 
 export const MovieList =({}) => {
