@@ -13,7 +13,7 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/Movies">Add a movie</Link>
             </li>
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/Movies/MovieList">Movie List</Link>
+                <Link className="navbar__link" to="Movies/MovieContainer">Movie List</Link>
             </li>
             {
                 localStorage.getItem("reelRec_user")

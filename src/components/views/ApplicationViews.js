@@ -1,7 +1,7 @@
 import { Outlet, Routes, Route } from "react-router-dom"
 import { UserProfile } from "../User/UserProfile"
 import { NewMovieForm } from "../Movies/NewMovieForm"
-import { MovieList } from "../Movies/MovieList"
+import { MovieContainer } from "../Movies/MovieContainer"
 
 export const ApplicationViews = () => {
 	return (
@@ -15,7 +15,7 @@ export const ApplicationViews = () => {
 			}>
 				<Route path="User" element={ <UserProfile />} />
 				<Route path="Movies" element={ <NewMovieForm />} />
-				<Route path="Movies/MovieList" element={ < MovieList />} />
+				<Route path="Movies/MovieContainer" element={ < MovieContainer />} />
 				
 			</Route>
 		</Routes>

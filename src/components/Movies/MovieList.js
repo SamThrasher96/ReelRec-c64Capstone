@@ -7,6 +7,18 @@ export const MovieList =({ searchTermState }) => {
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
     const navigate = useNavigate()
+    
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/movies`)
+                .then(response => response.json())
+                .then((movieArray) => {
+                    setMovies(movieArray)
+                    setFilteredMovies(movieArray)
+                })
+        },
+    []
+    )
 
     useEffect(
         () => {
@@ -14,21 +26,15 @@ export const MovieList =({ searchTermState }) => {
                 return movie.name.toLowerCase().startsWith(searchTermState.toLowerCase())
             })
             setFilteredMovies(searchedMovies)
-        }
+        },
+        [ searchTermState ]
     )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/movies`)
-                .then(response => response.json())
-                .then((movieArray) => {
-                    setMovies(movieArray)
-                })
-        }
-    )
 
     return <>
+    <>
     <button onClick={() => navigate("*")}>Home</button>
+    </>
     <h2>List of movies</h2>
     <article className="movies">
         {
