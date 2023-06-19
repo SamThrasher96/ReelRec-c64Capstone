@@ -10,7 +10,7 @@ export const MovieList =({ searchTermState }) => {
     
     useEffect(
         () => {
-            fetch(`http://localhost:8088/movies`)
+            fetch(`http://localhost:8088/movies?_expand=genre&_expand=mpaRating&_expand=streamingService`)
                 .then(response => response.json())
                 .then((movieArray) => {
                     setMovies(movieArray)
@@ -42,9 +42,9 @@ export const MovieList =({ searchTermState }) => {
                 (movie) => {
                     return <section className="movie" key={`movie--${movie.id}`}>
                         <header>Movie title:{movie.name}</header>
-                        <div>Genre: {movie.genreId}</div>
-                        <div>This movie is rated {movie.mpaRatingId}</div>
-                        <div>Streaming Service: {movie.streamingServiceId}</div>
+                        <div>Genre: {movie.genre.genre}</div>
+                        <div>This movie is rated {movie.mpaRating.mpaRating}</div>
+                        <div>Streaming Service: {movie.streamingService.service}</div>
                         <div>{movie.description}</div>
                     </section>
                 }
