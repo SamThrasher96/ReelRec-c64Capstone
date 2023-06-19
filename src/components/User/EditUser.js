@@ -24,6 +24,19 @@ useEffect(() => {
 const handleSaveButtonClick = (event) => {
     event.preventDefault()
 
+    return fetch(`http://localhost:8088/users/${users.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(profile)
+    })
+        .then(response => response.json())
+        .then(() => {
+
+        })
+
+
 }
 
 return (
@@ -39,7 +52,9 @@ return (
                     value={profile.name}
                     onChange={
                         (evt) => {
-                            // TODO: Update specialty property
+                            const copy = {...profile}
+                            copy.name = evt.target.value
+                            updateProfile(copy)
                         }
                     } />
             </div>
@@ -52,8 +67,10 @@ return (
                     value={profile.email}
                     onChange={
                         (evt) => {
-                            // TODO: Update rate property
-                        }
+                                const copy = {...profile}
+                                copy.email = evt.target.value
+                                updateProfile(copy)
+                            }
                     } />
             </div>
         </fieldset>
