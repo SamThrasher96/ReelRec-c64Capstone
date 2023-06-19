@@ -16,5 +16,6 @@ export const UserProfile = () => {
         <header className="userHeader">Name: {reelRecUserObject.name} </header>
         <div>Email: {reelRecUserObject.email}</div>
     </section>
+    <button onClick={() => navigate("User/EditUser")}>Edit profile</button>
     </>
 }
