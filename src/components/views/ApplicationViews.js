@@ -1,4 +1,4 @@
-import { Outlet, Routes, Route } from "react-router-dom"
+import { Outlet, Routes, Route, Navigate } from "react-router-dom"
 import { UserProfile } from "../User/UserProfile"
 import { NewMovieForm } from "../Movies/NewMovieForm"
 import { MovieContainer } from "../Movies/MovieContainer"
@@ -14,10 +14,10 @@ export const ApplicationViews = () => {
 					<Outlet />
 					</>
 			}>
-				<Route path="User" element={ <UserProfile />} />
 				<Route path="Movies" element={ <NewMovieForm />} />
 				<Route path="Movies/MovieContainer" element={ < MovieContainer />} />
-				<Route path="User/EditUser" element={ < EditUserProfile />} />
+				<Route path="User/EditUser/:userId" element={ < EditUserProfile />} />
+				<Route path="User" element={ <UserProfile />} />
 
 			</Route>
 		</Routes>

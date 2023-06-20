@@ -7,7 +7,7 @@ export const MovieSearch = ({ setterFunction }) => {
                         setterFunction(changeEvent.target.value)
                     }
                 }
-                type="text" placeholder="Search for a movie" />
+                type="text" placeholder="Search for a movie"></input>
         </div>
     )
 }

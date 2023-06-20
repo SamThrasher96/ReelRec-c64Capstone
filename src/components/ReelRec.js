@@ -5,14 +5,13 @@ import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import "./ReelRec.css"
-import { UserProfile } from "./User/UserProfile"
+
 
 
 export const ReelRec = () => {
 	return <Routes>
 		<Route path="/login" element={<Login />} />
 		<Route path="/register" element={<Register />} />
-		<Route path="/user" element={<UserProfile />} />
 
 
 		<Route path="*" element={

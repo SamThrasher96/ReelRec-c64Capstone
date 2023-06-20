@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import "./movie.css"
 
 
 export const MovieList =({ searchTermState }) => {
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
+    const [randomMovie, setRandomMovie] = useState([])
     const navigate = useNavigate()
     
     useEffect(
@@ -30,12 +31,27 @@ export const MovieList =({ searchTermState }) => {
         [ searchTermState ]
     )
 
+    const generateRandomMovie = () => {
+        const randomIndex = Math.floor(Math.random() * filteredMovies.length);
+        const randomMovie = filteredMovies[randomIndex];
+        setRandomMovie(randomMovie);
+    };
+
 
     return <>
     <>
     <button onClick={() => navigate("*")}>Home</button>
+    <button onClick={generateRandomMovie}>Generate Random Movie</button>
+
     </>
     <h2>List of movies</h2>
+    {randomMovie && (
+    <section className="movie">
+        <header>Random Movie:</header>
+        <div>Movie title: {randomMovie.name}</div>
+        <div>Description: {randomMovie.description}</div>
+    </section>
+)}
     <article className="movies">
         {
             filteredMovies.map(

@@ -11,11 +11,12 @@ export const UserProfile = () => {
     
     return <>
     <button onClick={() => navigate("*")}>Home</button>
-    <h1 className="title--main">ReelRec</h1>
     <section className="user">
         <header className="userHeader">Name: {reelRecUserObject.name} </header>
         <div>Email: {reelRecUserObject.email}</div>
     </section>
-    <button onClick={() => navigate("User/EditUser")}>Edit profile</button>
+    <button onClick={() => navigate(`/User/EditUser/${reelRecUserObject.id}`)}>Edit profile</button>
     </>
 }
+
+

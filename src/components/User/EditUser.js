@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 
 export const EditUserProfile = () => {
+    const {userId} = useParams()
     const [profile, updateProfile] = useState({
         name: "",
         email: ""
     })
 
-    const localReelRecUser = localStorage.getItem("reelRec_user")
-    const reelRecUserObject = JSON.parse(localReelRecUser)
-
 useEffect(() => {
-    return fetch (`http://localhost:8088/users?id=${reelRecUserObject.id}`)
+    return fetch (`http://localhost:8088/users?id=${userId}`)
         .then(response => response.json())
         .then((data) => {
             const userObject = data[0]
             updateProfile(userObject)
         })
     },
-    []
+    [userId]
 )
 
 const handleSaveButtonClick = (event) => {
     event.preventDefault()
 
-    return fetch(`http://localhost:8088/users/${users.id}`, {
+    return fetch(`http://localhost:8088/users/${userId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -34,7 +33,9 @@ const handleSaveButtonClick = (event) => {
         .then(response => response.json())
         .then(() => {
 
-        })
+        },
+    []
+    )
 
 
 }
