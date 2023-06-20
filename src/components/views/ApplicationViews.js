@@ -3,6 +3,7 @@ import { UserProfile } from "../User/UserProfile"
 import { NewMovieForm } from "../Movies/NewMovieForm"
 import { MovieContainer } from "../Movies/MovieContainer"
 import { EditUserProfile } from "../User/EditUser"
+import { RandomMovieDetails } from "../Movies/RandomMovieDetails"
 
 export const ApplicationViews = () => {
 	return (
@@ -16,6 +17,7 @@ export const ApplicationViews = () => {
 			}>
 				<Route path="Movies" element={ <NewMovieForm />} />
 				<Route path="Movies/MovieContainer" element={ < MovieContainer />} />
+				<Route path="Movies/RandomMovieDetails/:movieId" element={ < RandomMovieDetails />} />
 				<Route path="User/EditUser/:userId" element={ < EditUserProfile />} />
 				<Route path="User" element={ <UserProfile />} />
 
