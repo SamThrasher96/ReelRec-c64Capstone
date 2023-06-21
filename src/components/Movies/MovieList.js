@@ -49,7 +49,7 @@ export const MovieList =({ searchTermState }) => {
     <section className="movie">
         <header>Random Movie:</header>
         <div>
-            <Link to={`Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name} </Link>
+            <Link to={`/Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name} </Link>
         </div>
     </section>
 )}
