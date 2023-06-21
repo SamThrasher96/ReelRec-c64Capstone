@@ -10,7 +10,7 @@ export const EditUserProfile = () => {
     })
 
 useEffect(() => {
-    return fetch (`http://localhost:8088/users?id=${userId}`)
+    fetch (`http://localhost:8088/users?id=${userId}`)
         .then(response => response.json())
         .then((data) => {
             const userObject = data[0]
