@@ -37,6 +37,10 @@ export const MovieList =({ searchTermState }) => {
         setRandomMovie(randomMovie);
     };
 
+    const deleteButton = () => {
+        return <button onClick={() => {}} className="delete_movie">Delete Movie</button>
+    }
+
 
     return <>
     <>
@@ -63,6 +67,9 @@ export const MovieList =({ searchTermState }) => {
                         <div>This movie is rated {movie.mpaRating.mpaRating}</div>
                         <div>Streaming Service: {movie.streamingService.service}</div>
                         <div>{movie.description}</div>
+                        {
+                            deleteButton()
+                        }
                     </section>
                 }
             )
