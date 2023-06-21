@@ -14,6 +14,7 @@ export const RandomMovieDetails = () => {
   }, [movieId]);
 
   return (
+    
     <section className="movie" key={`movie--${randomlySelectedMovie?.id}`}>
       <header>Movie title: {randomlySelectedMovie?.name}</header>
       <div>Genre: {randomlySelectedMovie?.genre?.genre}</div>

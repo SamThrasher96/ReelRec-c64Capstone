@@ -77,7 +77,8 @@ return (
         </fieldset>
         <button
             onClick={(clickEvent) => { handleSaveButtonClick(clickEvent);
-                window.alert("Your profile has been updated");}}
+                window.alert("Your profile has been updated");
+                }}
             className="btn btn-primary">
             Save Profile
         </button>

@@ -1,4 +1,4 @@
-import { Outlet, Routes, Route, Navigate } from "react-router-dom"
+import { Outlet, Routes, Route } from "react-router-dom"
 import { UserProfile } from "../User/UserProfile"
 import { NewMovieForm } from "../Movies/NewMovieForm"
 import { MovieContainer } from "../Movies/MovieContainer"
