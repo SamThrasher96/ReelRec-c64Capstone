@@ -9,6 +9,7 @@ export const EditUserProfile = () => {
         email: ""
     })
 
+
 useEffect(() => {
     fetch (`http://localhost:8088/users?id=${userId}`)
         .then(response => response.json())
@@ -32,7 +33,6 @@ const handleSaveButtonClick = (event) => {
     })
         .then(response => response.json())
         .then(() => {
-
         },
     []
     )
