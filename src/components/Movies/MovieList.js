@@ -6,7 +6,6 @@ import "./movie.css"
 export const MovieList =({ searchTermState }) => {
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
-    const [randomMovie, setRandomMovie] = useState([])
     const navigate = useNavigate()
     
     const getMovies = () => {
@@ -35,11 +34,6 @@ export const MovieList =({ searchTermState }) => {
         [ searchTermState ]
     )
 
-    const generateRandomMovie = () => {
-        const randomIndex = Math.floor(Math.random() * filteredMovies.length);
-        const randomMovie = filteredMovies[randomIndex];
-        setRandomMovie(randomMovie);
-    };
 
     const deleteButton = (movieId) => {
                 fetch(`http://localhost:8088/movies/${movieId}`, {
@@ -53,19 +47,9 @@ export const MovieList =({ searchTermState }) => {
 
     return <>
     <>
-    <button onClick={() => navigate("*")}>Home</button>
-    <button onClick={generateRandomMovie}>Generate Random Movie</button>
-
+    <button onClick={() => navigate("/")}>Home</button>
     </>
     <h2>List of movies</h2>
-    {randomMovie && (
-    <section className="movie">
-        <header>Random Movie:</header>
-        <div>
-            <Link to={`/Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name} </Link>
-        </div>
-    </section>
-)}
     <article className="movies">
         {
             filteredMovies.map(
