@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import "./movie.css"
 import { Link } from "react-router-dom"
+import { Button } from "@mui/material"
 
 export const RandomMovieGenerator = () => {
     const [movies, setMovies] = useState([])
@@ -91,7 +92,7 @@ useEffect(
   return (
     <>
       <div>
-        <button onClick={generateRandomMovie}>Generate Random Movie</button>
+        <Button variant="contained" size="large"  onClick={generateRandomMovie}>Generate Random Movie</Button>
       </div>
 
       <div>

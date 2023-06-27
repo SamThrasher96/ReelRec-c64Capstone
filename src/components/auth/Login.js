@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
+import { Button } from "@mui/material";
 
 export const Login = () => {
     const [email, set] = useState("sam@gmail.com")
@@ -44,9 +45,9 @@ export const Login = () => {
                             required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
+                        <Button variant="contained" type="submit" color="success">
                             Sign in
-                        </button>
+                        </Button>
                     </fieldset>
                 </form>
             </section>

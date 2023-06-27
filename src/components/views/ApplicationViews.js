@@ -5,6 +5,8 @@ import { MovieContainer } from "../Movies/MovieContainer"
 import { EditUserProfile } from "../User/EditUser"
 import { RandomMovieDetails } from "../Movies/RandomMovieDetails"
 import { RandomMovieGenerator } from "../Movies/RandomMovies"
+import { Typography } from "@mui/material"
+
 
 const Home = () => {
   const location = useLocation()
@@ -12,7 +14,13 @@ const Home = () => {
   return (
     <>
       <h1 className="title--main">ReelRec</h1>
-      <div>What are we watching next?</div>
+      <Typography 
+	  variant="h5"
+	  color="InfoText"
+	  align="center"
+	  gutterBottom
+	  >
+		What are we watching next?</Typography>
       {location.pathname === "/" && <RandomMovieGenerator />}
       <Outlet />
     </>
