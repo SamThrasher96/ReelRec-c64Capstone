@@ -18,6 +18,9 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="Movies/WatchList">Watch List</Link>
             </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="Movies/FavoriteList">Favorites</Link>
+            </li>
             {
                 localStorage.getItem("reelRec_user")
                     ? <li className="navbar__item navbar__logout">

@@ -36,10 +36,11 @@ export const MovieList = ({ searchTermState }) => {
     const watchListObject = {
       movieId: movieId,
       userId: userId,
-      watchList: true
+      watchList: true,
+      favorite: false
     };
 
-    fetch(`http://localhost:8088/userWatchLists`, {
+    fetch(`http://localhost:8088/userWatchListAndFavorites`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -48,8 +49,29 @@ export const MovieList = ({ searchTermState }) => {
     })
       .then(response => response.json())
       .then(() => {
-        // Success! You can perform any additional actions here
         console.log("Movie added to watch list");
+      });
+  };
+
+  const addToFavoriteList = (movieId) => {
+    const userId = ReelRecUserObject.id
+    const favoriteListObject = {
+      movieId: movieId,
+      userId: userId,
+      watchList: false,
+      favorite: true
+    };
+
+    fetch(`http://localhost:8088/userWatchListAndFavorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(favoriteListObject)
+    })
+      .then(response => response.json())
+      .then(() => {
+        console.log("Movie added to favorite list");
       });
   };
 
@@ -94,6 +116,15 @@ export const MovieList = ({ searchTermState }) => {
                 onClick={() => addToWatchList(movie.id)}
               >
                 Add to Watch List
+              </Button>
+              <Button
+                variant="contained"
+                color="warning"
+                size="small"
+                disableElevation
+                onClick={() => addToFavoriteList(movie.id)}
+              >
+                Add to Favorite List
               </Button>
             </section>
           );

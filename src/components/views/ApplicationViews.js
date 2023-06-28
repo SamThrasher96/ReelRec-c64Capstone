@@ -7,6 +7,7 @@ import { RandomMovieDetails } from "../Movies/RandomMovieDetails"
 import { RandomMovieGenerator } from "../Movies/RandomMovies"
 import { Typography } from "@mui/material"
 import { UserWatchList } from "../Movies/WatchList"
+import { UserFavoriteList } from "../Movies/FavoriteList"
 
 const Home = () => {
   const location = useLocation()
@@ -36,6 +37,7 @@ export const ApplicationViews = () => {
       <Route path="Movies/RandomMovieDetails/:movieId" element={<RandomMovieDetails />} />
       <Route path="User/EditUser/:userId" element={<EditUserProfile />} />
       <Route path="Movies/WatchList" element={<UserWatchList />} />
+      <Route path="Movies/FavoriteList" element={<UserFavoriteList />} />
       <Route path="User" element={<UserProfile />} />
     </Routes>
   )

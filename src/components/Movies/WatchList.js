@@ -9,10 +9,10 @@ export const UserWatchList = () => {
     const ReelRecUserObject = JSON.parse(localReelRecUser)
 
     useEffect(() => {
-        fetch(`http://localhost:8088/userWatchLists?_expand=movie`)
+        fetch(`http://localhost:8088/userWatchListAndFavorites?_expand=movie`)
             .then(response => response.json())
             .then((watchListArray) => {
-                const filteredWatchList = watchListArray.filter(item => item.userId === ReelRecUserObject.id);
+                const filteredWatchList = watchListArray.filter(item => item.userId === ReelRecUserObject.id && item.watchList === true);
                 setUserWatchList(filteredWatchList);
                 console.log(filteredWatchList)
             })
