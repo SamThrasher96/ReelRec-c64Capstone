@@ -70,6 +70,7 @@ export const MovieList = ({ searchTermState }) => {
         {filteredMovies.map((movie) => {
           return (
             <section className="movie" key={`movie--${movie.id}`}>
+              <img src={movie.image} alt={movie.name} />
               <header>Movie title:{movie.name}</header>
               <div>Genre: {movie.genre.genre}</div>
               <div>This movie is rated {movie.mpaRating.mpaRating}</div>

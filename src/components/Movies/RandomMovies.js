@@ -139,6 +139,7 @@ useEffect(
 
         {randomMovie && (
           <section className="movie">
+            <img src={randomMovie.image} alt={randomMovie.name} />
             <header>Random Movie:</header>
             <div>
               <Link to={`/Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name}</Link>

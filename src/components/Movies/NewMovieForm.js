@@ -9,7 +9,8 @@ export const NewMovieForm = () => {
         genreId: 0,
         streamingServiceId: 0,
         mpaRatingId: 0,
-        description: ""
+        description: "",
+        image: ""
     });
 
 const navigate = useNavigate();
@@ -26,7 +27,8 @@ const handleSaveButtonClick = (event) => {
         genreId: movie.genreId,
         streamingServiceId: movie.streamingServiceId,
         mpaRatingId: movie.mpaRatingId,
-        description: movie.description
+        description: movie.description,
+        image: movie.image
     }
 
     if (movie.name !== "" && movie.genreId > 0 && movie.streamingServiceId >0 && movie.mpaRatingId >0 && movie.description !== "" ) {
@@ -180,6 +182,25 @@ return (
             />
         </div>
     </fieldset>
+    <fieldset>
+        <div className="form-group">
+            <label htmlFor="description">Movie Cover</label>
+            <input
+            required
+            autoFocus
+            type="text"
+            className="form-control"
+            placeholder="enter a link to the movie cover here"
+            value={movie.image}
+            onChange={(event) => {
+                const copy = {...movie};
+                copy.image = event.target.value;
+                updateMovie(copy);
+            }}
+            />
+        </div>
+    </fieldset>
+    
     <button
         onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
         className="btn btn-primary"

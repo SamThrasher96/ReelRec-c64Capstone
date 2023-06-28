@@ -22,12 +22,14 @@ export const UserWatchList = () => {
 
 return <>
 <h2>Watch List</h2>
+<button onClick={() => navigate("/")}>Home</button>
 
 <article className="movies">
     {
         userWatchList.map(
             (movie) => {
                 return <section className="movie" key={`userWatchListMovies--${movie.id}`}>
+                    <img src={movie.movie.image} alt={movie.movie.name} />
                     <header>{movie.movie.name}</header>
                     <footer>Description: {movie.movie.description}</footer>
                 </section>
