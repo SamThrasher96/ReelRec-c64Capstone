@@ -6,7 +6,7 @@ import { EditUserProfile } from "../User/EditUser"
 import { RandomMovieDetails } from "../Movies/RandomMovieDetails"
 import { RandomMovieGenerator } from "../Movies/RandomMovies"
 import { Typography } from "@mui/material"
-
+import { UserWatchList } from "../Movies/WatchList"
 
 const Home = () => {
   const location = useLocation()
@@ -35,6 +35,7 @@ export const ApplicationViews = () => {
       <Route path="Movies/MovieContainer" element={<MovieContainer />} />
       <Route path="Movies/RandomMovieDetails/:movieId" element={<RandomMovieDetails />} />
       <Route path="User/EditUser/:userId" element={<EditUserProfile />} />
+      <Route path="Movies/WatchList" element={<UserWatchList />} />
       <Route path="User" element={<UserProfile />} />
     </Routes>
   )
