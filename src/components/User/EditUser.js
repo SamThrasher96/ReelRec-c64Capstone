@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 export const EditUserProfile = () => {
@@ -9,6 +9,7 @@ export const EditUserProfile = () => {
         email: "",
         profilePic: ""
     })
+    const navigate = useNavigate()
 
 
 useEffect(() => {
@@ -34,6 +35,7 @@ const handleSaveButtonClick = (event) => {
     })
         .then(response => response.json())
         .then(() => {
+            navigate("/User")
         },
     []
     )
