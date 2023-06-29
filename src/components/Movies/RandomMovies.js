@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react"
-import "./movie.css"
-import { Link } from "react-router-dom"
-import { Button } from "@mui/material"
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 
 export const RandomMovieGenerator = () => {
-    const [movies, setMovies] = useState([])
-    const [randomMovie, setRandomMovie] = useState(null)
-    const [filterCategory, setFilterCategory] = useState("")
-    const [filterValue, setFilterValue] = useState("")
-    const [movieGenre, setMovieGenre] = useState([])
-    const [streamingService, setStreamingService] = useState([])
-    const [mpaRating, setMpaRating] = useState([])
+  const [movies, setMovies] = useState([]);
+  const [randomMovie, setRandomMovie] = useState(null);
+  const [filterCategory, setFilterCategory] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+  const [movieGenre, setMovieGenre] = useState([]);
+  const [streamingService, setStreamingService] = useState([]);
+  const [mpaRating, setMpaRating] = useState([]);
+  const localReelRecUser = localStorage.getItem("reelRec_user");
+  const ReelRecUserObject = JSON.parse(localReelRecUser);
+  const [userWatchListAndFavorites, setUserWatchListAndFavorites] = useState([]);
 
   const getMovies = () => {
     fetch("http://localhost:8088/movies?_expand=genre&_expand=mpaRating&_expand=streamingService")
@@ -33,9 +35,9 @@ export const RandomMovieGenerator = () => {
             })
     },
     []
-)
+  )
 
-useEffect(
+  useEffect(
     () => {
         fetch(`http://localhost:8088/streamingServices`)
             .then(response => response.json())
@@ -44,9 +46,9 @@ useEffect(
             })
     },
     []
-)
+  )
 
-useEffect(
+  useEffect(
     () => {
         fetch(`http://localhost:8088/mpaRatings`)
             .then(response => response.json())
@@ -55,12 +57,20 @@ useEffect(
             })
     },
     []
-)
+  )
+
+  useEffect(() => {
+    fetch("http://localhost:8088/userWatchListAndFavorites")
+      .then(response => response.json())
+      .then((watchListArray) => {
+        setUserWatchListAndFavorites(watchListArray)
+      })
+  }, [])
 
   const generateRandomMovie = () => {
-    let filteredMovies = movies
+    let filteredMovies = movies;
     if (filterCategory && filterValue) {
-        filteredMovies = movies.filter(movie => {
+      filteredMovies = movies.filter(movie => {
         if (filterCategory === "genre") {
           return movie.genreId == filterValue
         } else if (filterCategory === "streamingService") {
@@ -80,19 +90,35 @@ useEffect(
     }
   }
 
+  const generateRandomMovieFromWatchList = () => {
+    const userWatchList = userWatchListAndFavorites.filter(
+      (item) => item.userId === ReelRecUserObject.id && item.watchList
+    );
+
+    if (userWatchList.length > 0) {
+      const randomIndex = Math.floor(Math.random() * userWatchList.length);
+      const randomMovieId = userWatchList[randomIndex].movieId;
+      const randomMovie = movies.find((movie) => movie.id === randomMovieId);
+      setRandomMovie(randomMovie);
+    } else {
+      setRandomMovie(null);
+    }
+  };
+
   const handleFilterCategoryChange = (event) => {
-    setFilterCategory(event.target.value)
-    setFilterValue("")
+    setFilterCategory(event.target.value);
+    setFilterValue("");
   }
 
   const handleFilterValueChange = (event) => {
-    setFilterValue(event.target.value)
+    setFilterValue(event.target.value);
   }
 
   return (
     <>
       <div>
-        <Button variant="contained" size="large"  onClick={generateRandomMovie}>Generate Random Movie</Button>
+        <Button variant="contained" size="large" onClick={generateRandomMovie}>Generate Random Movie</Button>
+        <Button variant="contained" size="large" onClick={generateRandomMovieFromWatchList}>Generate Random Movie from Watch List</Button>
       </div>
 
       <div>
@@ -114,7 +140,7 @@ useEffect(
               <select id="filterValue" value={filterValue} onChange={handleFilterValueChange}>
                 <option value="">Select Genre</option>
                 {movieGenre.map(item => (
-                    <option value={item.id} key={item.id}>{item.genre}</option>
+                  <option value={item.id} key={item.id}>{item.genre}</option>
                 ))}
               </select>
             )}
@@ -122,7 +148,7 @@ useEffect(
               <select id="filterValue" value={filterValue} onChange={handleFilterValueChange}>
                 <option value="" defaultValue>Select Streaming Service</option>
                 {streamingService.map(item => (
-                     <option value={item.id} key={item.id}>{item.service}</option>
+                  <option value={item.id} key={item.id}>{item.service}</option>
                 ))}
               </select>
             )}
@@ -130,7 +156,7 @@ useEffect(
               <select id="filterValue" value={filterValue} onChange={handleFilterValueChange}>
                 <option value="" defaultValue>Select MPA Rating</option>
                 {mpaRating.map(item => (
-                    <option value={item.id} key={item.id}>{item.mpaRating}</option>
+                  <option value={item.id} key={item.id}>{item.mpaRating}</option>
                 ))}
               </select>
             )}
