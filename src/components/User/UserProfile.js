@@ -26,6 +26,7 @@ export const UserProfile = () => {
             return (
                 <>
                 <h2>User Profile</h2>
+                <img src={user.profilePic} alt={user.name} />
                 <div>Name:{user.name}</div>
                 <div>Email:{user.email}</div>
                 <button onClick={() => navigate(`/User/EditUser/${user.id}`)}>Edit profile</button>

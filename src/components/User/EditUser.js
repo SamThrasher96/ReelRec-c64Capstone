@@ -6,7 +6,8 @@ export const EditUserProfile = () => {
     const {userId} = useParams()
     const [profile, updateProfile] = useState({
         name: "",
-        email: ""
+        email: "",
+        profilePic: ""
     })
 
 
@@ -72,6 +73,23 @@ return (
                                 copy.email = evt.target.value
                                 updateProfile(copy)
                             }
+                    } />
+            </div>
+        </fieldset>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="name">Profile Pic:</label>
+                <input
+                    required autoFocus
+                    type="text"
+                    className="form-control"
+                    value={profile.profilePic}
+                    onChange={
+                        (evt) => {
+                            const copy = {...profile}
+                            copy.profilePic = evt.target.value
+                            updateProfile(copy)
+                        }
                     } />
             </div>
         </fieldset>
