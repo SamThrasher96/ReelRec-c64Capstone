@@ -8,25 +8,27 @@ import { RandomMovieGenerator } from "../Movies/RandomMovies"
 import { Typography } from "@mui/material"
 import { UserWatchList } from "../Movies/WatchList"
 import { UserFavoriteList } from "../Movies/FavoriteList"
+import "./ApplicationViews.css"
 
 const Home = () => {
   const location = useLocation()
 
   return (
-    <>
-      <h1 className="title--main">ReelRec</h1>
-      <Typography 
-	  variant="h5"
-	  color="InfoText"
-	  align="center"
-	  gutterBottom
-	  >
-		What are we watching next?</Typography>
+    <div className="home-container">
+      <img
+        src="./images/ReelRecLogo.png"
+        alt="ReelRec Logo"
+        className="logo-image"
+      />
+      <Typography variant="h5" color="InfoText" align="center" gutterBottom>
+        What are we watching next?
+      </Typography>
       {location.pathname === "/" && <RandomMovieGenerator />}
       <Outlet />
-    </>
-  )
-}
+    </div>
+  );
+};
+
 
 export const ApplicationViews = () => {
   return (
