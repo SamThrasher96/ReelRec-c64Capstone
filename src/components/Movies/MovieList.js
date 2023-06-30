@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./movie.css";
-import { Button } from "@mui/material";
+import { Button, Card, CardContent, CardMedia, Grid, Typography, CardActions } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const MovieList = ({ searchTermState }) => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const navigate = useNavigate();
-  const localReelRecUser = localStorage.getItem("reelRec_user")
-  const ReelRecUserObject = JSON.parse(localReelRecUser)
+  const localReelRecUser = localStorage.getItem("reelRec_user");
+  const ReelRecUserObject = JSON.parse(localReelRecUser);
 
   const getMovies = () => {
     fetch(`http://localhost:8088/movies?_expand=genre&_expand=mpaRating&_expand=streamingService`)
       .then(response => response.json())
       .then((movieArray) => {
-        setMovies(movieArray);
+        const sortedMovies = movieArray.sort((a, b) => a.name.localeCompare(b.name));
+        setMovies(sortedMovies);
         setFilteredMovies(movieArray);
       });
   };
@@ -32,7 +31,7 @@ export const MovieList = ({ searchTermState }) => {
   }, [searchTermState]);
 
   const addToWatchList = (movieId) => {
-    const userId = ReelRecUserObject.id
+    const userId = ReelRecUserObject.id;
     const watchListObject = {
       movieId: movieId,
       userId: userId,
@@ -54,7 +53,7 @@ export const MovieList = ({ searchTermState }) => {
   };
 
   const addToFavoriteList = (movieId) => {
-    const userId = ReelRecUserObject.id
+    const userId = ReelRecUserObject.id;
     const favoriteListObject = {
       movieId: movieId,
       userId: userId,
@@ -86,52 +85,64 @@ export const MovieList = ({ searchTermState }) => {
 
   return (
     <>
-      <button onClick={() => navigate("/")}>Home</button>
-      <h2>List of movies</h2>
-      <article className="movies">
-        {filteredMovies.map((movie) => {
-          return (
-            <section className="movie" key={`movie--${movie.id}`}>
-              <img src={movie.image} alt={movie.name} />
-              <header>Movie title:{movie.name}</header>
-              <div>Genre: {movie.genre.genre}</div>
-              <div>This movie is rated {movie.mpaRating.mpaRating}</div>
-              <div>Streaming Service: {movie.streamingService.service}</div>
-              <div>{movie.description}</div>
-              <Button
-                variant="contained"
-                color="error"
-                size="small"
-                disableElevation
-                startIcon={<DeleteOutlineIcon />}
-                onClick={() => deleteButton(movie.id)}
-              >
-                Delete Movie
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                disableElevation
-                onClick={() => addToWatchList(movie.id)}
-              >
-                Add to Watch List
-              </Button>
-              <Button
-                variant="contained"
-                color="warning"
-                size="small"
-                disableElevation
-                onClick={() => addToFavoriteList(movie.id)}
-              >
-                Add to Favorite List
-              </Button>
-            </section>
-          );
-        })}
-      </article>
+      <Grid container spacing={2} style={{ marginTop: "10px" }}>
+        {filteredMovies.map((movie) => (
+          <Grid item xs={12} sm={6} md={4} key={`movie--${movie.id}`}>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column", margin: "10px" }}>
+              <CardMedia
+                component="img"
+                height="650"
+                image={movie.image}
+                alt={movie.name}
+              />
+              <CardContent>
+                <Typography variant="h6" align="center" gutterBottom>
+                  {movie.name}
+                </Typography>
+                <Typography variant="body2" align="center">
+                  Genre: {movie.genre.genre}
+                </Typography>
+                <Typography variant="body2" align="center">
+                  This movie is rated {movie.mpaRating.mpaRating}
+                </Typography>
+                <Typography variant="body2" align="center">
+                  Streaming Service: {movie.streamingService.service}
+                </Typography>
+                <Typography variant="body2" align="center">
+                  {movie.description}
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: "center"}}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  startIcon={<DeleteOutlineIcon />}
+                  onClick={() => deleteButton(movie.id)}
+                >
+                  Delete Movie
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  onClick={() => addToWatchList(movie.id)}
+                >
+                  Add to Watch List
+                </Button>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  size="small"
+                  onClick={() => addToFavoriteList(movie.id)}
+                >
+                  Add to Favorite List
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 };
-
-
