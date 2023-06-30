@@ -1,30 +1,41 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export const RandomMovieDetails = () => {
   const { movieId } = useParams();
   const [randomlySelectedMovie, updateRandomlySelectedMovie] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8088/movies/${movieId}?_expand=genre&_expand=mpaRating&_expand=streamingService`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((singleMovie) => {
         updateRandomlySelectedMovie(singleMovie);
-      })
+      });
   }, [movieId]);
 
   return (
-    
-    <><section className="movie" key={`movie--${randomlySelectedMovie?.id}`}>
-      <img src={randomlySelectedMovie.image} alt={randomlySelectedMovie.name} />
-      <header>Movie title: {randomlySelectedMovie?.name}</header>
-      <div>Genre: {randomlySelectedMovie?.genre?.genre}</div>
-      <div>This movie is rated {randomlySelectedMovie?.mpaRating?.mpaRating}</div>
-      <div>Streaming Service: {randomlySelectedMovie?.streamingService?.service}</div>
-      <div>{randomlySelectedMovie?.description}</div>
-    </section><>
-        <button onClick={() => navigate("/")}>Home</button>
-      </></>
+    <Card sx={{ maxWidth: 600, margin: "auto" }}>
+      <CardMedia component="img" height={400} width={300} image={randomlySelectedMovie.image} alt={randomlySelectedMovie.name} />
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          Movie title: {randomlySelectedMovie.name}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Genre: {randomlySelectedMovie.genre?.genre}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          This movie is rated {randomlySelectedMovie.mpaRating?.mpaRating}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Streaming Service: {randomlySelectedMovie.streamingService?.service}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" mt={2}>
+          {randomlySelectedMovie.description}
+        </Typography>
+      </CardContent>
+      <button onClick={() => navigate("/")}>Home</button>
+    </Card>
   );
 };

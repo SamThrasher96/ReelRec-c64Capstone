@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export const RandomMovieGenerator = () => {
   const [movies, setMovies] = useState([]);
@@ -117,17 +117,17 @@ export const RandomMovieGenerator = () => {
 
   return (
     <>
-<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '16px' }}>
-  <Button variant="contained" size="large" r="10 px" onClick={generateRandomMovie}>
-    Generate Random Movie
-  </Button>
-  <Button variant="contained" size="large" onClick={generateRandomMovieFromWatchList}>
-    Generate Random Movie from Watch List
-  </Button>
-  <Button variant="contained" size="large" onClick={handleShowFilters}>
-    Generate a random movie with filters.
-  </Button>
-</Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '16px', paddingBottom: '16px' }}>
+        <Button variant="contained" size="large" r="10 px" onClick={generateRandomMovie}>
+          Generate Random Movie
+        </Button>
+        <Button variant="contained" size="large" onClick={generateRandomMovieFromWatchList}>
+          Generate Random Movie from Watch List
+        </Button>
+        <Button variant="contained" size="large" onClick={handleShowFilters}>
+          Generate a random movie with filters.
+        </Button>
+      </Box>
 
       {showFilters && (
         <div>
@@ -175,14 +175,23 @@ export const RandomMovieGenerator = () => {
       )}
 
       {randomMovie && (
-        <section className="movie">
-          <img src={randomMovie.image} alt={randomMovie.name} />
-          <header>Random Movie:</header>
-          <div>
-            <Link to={`/Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name}</Link>
-          </div>
-        </section>
+        <Card sx={{ maxWidth: 400, margin: 'auto', marginTop: '20px' }}>
+          <CardMedia
+            component="img"
+            alt={randomMovie.name}
+            height={400}
+            image={randomMovie.image}
+          />
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Random Movie:
+            </Typography>
+            <Typography variant="body1" component="div">
+              <Link to={`/Movies/RandomMovieDetails/${randomMovie.id}`}>Movie title: {randomMovie.name}</Link>
+            </Typography>
+          </CardContent>
+        </Card>
       )}
     </>
-  )
+  );
 }
