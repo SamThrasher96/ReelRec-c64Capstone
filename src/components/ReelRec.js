@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Authorized } from "./views/Authorized";
 import { ApplicationViews } from "./views/ApplicationViews";
-import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -39,7 +38,6 @@ export const ReelRec = () => {
           element={
             <Authorized>
               <>
-                <NavBar />
                 <ApplicationViews />
               </>
             </Authorized>
