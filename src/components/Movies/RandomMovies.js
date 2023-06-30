@@ -118,13 +118,13 @@ export const RandomMovieGenerator = () => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '16px', paddingBottom: '16px' }}>
-        <Button variant="contained" size="large" r="10 px" onClick={generateRandomMovie}>
+        <Button variant="contained" size="large" sx={{ flex: 1 }} onClick={generateRandomMovie}>
           Generate Random Movie
         </Button>
-        <Button variant="contained" size="large" onClick={generateRandomMovieFromWatchList}>
+        <Button variant="contained" size="large" sx={{ flex: 1 }} color="secondary" onClick={generateRandomMovieFromWatchList}>
           Generate Random Movie from Watch List
         </Button>
-        <Button variant="contained" size="large" onClick={handleShowFilters}>
+        <Button variant="contained" size="large" sx={{ flex: 1 }} onClick={handleShowFilters}>
           Generate a random movie with filters.
         </Button>
       </Box>
