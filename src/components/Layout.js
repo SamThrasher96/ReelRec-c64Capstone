@@ -1,8 +1,7 @@
+import React, { useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Box, Menu, MenuItem, IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import React from 'react';
-
 
 const theme = createTheme({
   palette: {
@@ -26,7 +25,7 @@ export const Layout = ({ children }) => {
   const isLoggedIn = !!localStorage.getItem("reelRec_user");
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
-  const [menuAnchor, setMenuAnchor] = React.useState(null)
+  const [menuAnchor, setMenuAnchor] = React.useState(null);
 
   return (
     <div>
@@ -56,6 +55,7 @@ export const Layout = ({ children }) => {
                   onClick={() => {
                     localStorage.removeItem("reelRec_user");
                     navigate("/", { replace: true });
+                    setMenuAnchor(null)
                   }}
                 >
                   Logout
