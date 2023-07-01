@@ -1,6 +1,7 @@
-import { AppBar, Toolbar, Typography, Stack, Avatar, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Avatar, Box, Menu, MenuItem, IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
 
 
 const theme = createTheme({
@@ -13,7 +14,7 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          height: 64, // Adjust the height as needed
+          height: 64
         },
       },
     },
@@ -25,6 +26,7 @@ export const Layout = ({ children }) => {
   const isLoggedIn = !!localStorage.getItem("reelRec_user");
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
+  const [menuAnchor, setMenuAnchor] = React.useState(null)
 
   return (
     <div>
@@ -34,39 +36,31 @@ export const Layout = ({ children }) => {
             <Toolbar>
               <Typography variant="h6">ReelRec</Typography>
               <Box flexGrow={1} />
-              <Stack direction="row" spacing={2} alignItems="center">
-                <Link className="navbar__link" to="/User">
-                  User Profile
-                </Link>
-                <Link className="navbar__link" to="/Movies">
-                  Add a movie
-                </Link>
-                <Link className="navbar__link" to="Movies/MovieContainer">
-                  Movie List
-                </Link>
-                <Link className="navbar__link" to="Movies/WatchList">
-                  Watch List
-                </Link>
-                <Link className="navbar__link" to="Movies/FavoriteList">
-                  Favorites
-                </Link>
-                <Link
-                  className="navbar__link navbar__logout"
-                  to=""
+              <IconButton
+                color="inherit"
+                onClick={(e) => setMenuAnchor(e.currentTarget)}
+              >
+                <Avatar alt="Profile" src={ReelRecUserObject.profilePic} />
+              </IconButton>
+              <Menu
+                anchorEl={menuAnchor}
+                open={Boolean(menuAnchor)}
+                onClose={() => setMenuAnchor(null)}
+              >
+                <MenuItem component={Link} to="/User">User Profile</MenuItem>
+                <MenuItem component={Link} to="/Movies">Add a movie</MenuItem>
+                <MenuItem component={Link} to="Movies/MovieContainer">Movie List</MenuItem>
+                <MenuItem component={Link} to="Movies/WatchList">Watch List</MenuItem>
+                <MenuItem component={Link} to="Movies/FavoriteList">Favorites</MenuItem>
+                <MenuItem
                   onClick={() => {
                     localStorage.removeItem("reelRec_user");
                     navigate("/", { replace: true });
                   }}
                 >
                   Logout
-                </Link>
-                {isLoggedIn && (
-    <Avatar
-      alt="Profile"
-      src={ReelRecUserObject.profilePic} 
-    />
-  )}
-              </Stack>
+                </MenuItem>
+              </Menu>
             </Toolbar>
           </AppBar>
         )}
