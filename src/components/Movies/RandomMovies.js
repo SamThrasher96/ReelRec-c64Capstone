@@ -10,10 +10,10 @@ export const RandomMovieGenerator = () => {
   const [movieGenre, setMovieGenre] = useState([]);
   const [streamingService, setStreamingService] = useState([]);
   const [mpaRating, setMpaRating] = useState([]);
+  const [userWatchListAndFavorites, setUserWatchListAndFavorites] = useState([]);
+  const [showFilters, setShowFilters] = useState(false); 
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
-  const [userWatchListAndFavorites, setUserWatchListAndFavorites] = useState([]);
-  const [showFilters, setShowFilters] = useState(false); // Added state to toggle filters visibility
 
   const getMovies = () => {
     fetch("http://localhost:8088/movies?_expand=genre&_expand=mpaRating&_expand=streamingService")
@@ -168,7 +168,15 @@ export const RandomMovieGenerator = () => {
                   ))}
                 </select>
               )}
-              <Button variant="contained" size="large" onClick={handleGenerateWithFilters}>Generate</Button>
+              <Button
+  variant="contained"
+  size="large"
+  onClick={handleGenerateWithFilters}
+  sx={{ marginTop: '10px', marginLeft: '10px' }}
+>
+  Generate
+</Button>
+
             </div>
           )}
         </div>
