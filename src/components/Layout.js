@@ -1,6 +1,7 @@
-import { AppBar, Toolbar, Typography, Stack } from "@mui/material";
+import { AppBar, Toolbar, Typography, Stack, Avatar, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
+
 
 const theme = createTheme({
   palette: {
@@ -22,6 +23,8 @@ const theme = createTheme({
 export const Layout = ({ children }) => {
   const navigate = useNavigate();
   const isLoggedIn = !!localStorage.getItem("reelRec_user");
+  const localReelRecUser = localStorage.getItem("reelRec_user");
+  const ReelRecUserObject = JSON.parse(localReelRecUser);
 
   return (
     <div>
@@ -30,6 +33,7 @@ export const Layout = ({ children }) => {
           <AppBar position="static" color="primary">
             <Toolbar>
               <Typography variant="h6">ReelRec</Typography>
+              <Box flexGrow={1} />
               <Stack direction="row" spacing={2} alignItems="center">
                 <Link className="navbar__link" to="/User">
                   User Profile
@@ -56,6 +60,12 @@ export const Layout = ({ children }) => {
                 >
                   Logout
                 </Link>
+                {isLoggedIn && (
+    <Avatar
+      alt="Profile"
+      src={ReelRecUserObject.profilePic} 
+    />
+  )}
               </Stack>
             </Toolbar>
           </AppBar>
