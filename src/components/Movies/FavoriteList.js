@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export const UserFavoriteList = () => {
     const [userFavoriteList, setUserFavoriteList] = useState([]);
@@ -13,7 +14,7 @@ useEffect(() => {
         .then((favoriteListArray) => {
         const filterFavoriteList = favoriteListArray.filter(
             (item) =>
-            item.userId === ReelRecUserObject.id && item.favorite === true
+                item.userId === ReelRecUserObject.id && item.favorite === true
         );
         setUserFavoriteList(filterFavoriteList);
         console.log(filterFavoriteList);
@@ -28,35 +29,57 @@ const removeFromFavorites = (favoriteId) => {
         headers: {
         "Content-Type": "application/json",
     },
-        body: JSON.stringify({ favorite: false }),
+    body: JSON.stringify({ favorite: false }),
     }).then(() => {
         const updatedFavorites = userFavoriteList.filter(
         (item) => item.id !== favoriteId
-    );
+        );
         setUserFavoriteList(updatedFavorites);
         console.log("Movie removed from favorites");
     });
 };
 
-    return (
+return (
     <>
         <h2>Favorite List</h2>
-        <button onClick={() => navigate("/")}>Home</button>
+        <Button variant="contained" onClick={() => navigate("/")}>
+        Home
+    </Button>
 
-        <article className="movies">
+    <div className="movies" style={{ display: "flex", flexWrap: "wrap" }}>
         {userFavoriteList.map((movie) => {
             return (
-            <section className="movie" key={`userFavoriteList--${movie.id}`}>
-                <img src={movie.movie.image} alt={movie.movie.name} />
-                <header>{movie.movie.name}</header>
-                <footer>Description: {movie.movie.description}</footer>
-                <button onClick={() => removeFromFavorites(movie.id)}>
+            <Card
+                key={`userFavoriteList--${movie.id}`}
+                sx={{ maxWidth: 345, margin: "10px" }}
+            >
+                <CardMedia
+                component="img"
+                height="140"
+                image={movie.movie.image}
+                alt={movie.movie.name}
+                />
+                <CardContent>
+                <Typography variant="h6" align="center" gutterBottom>
+                    {movie.movie.name}
+                </Typography>
+                <Typography variant="body2" align="center">
+                    Description: {movie.movie.description}
+                </Typography>
+                </CardContent>
+                <Button
+                variant="contained"
+                color="error"
+                size="small"
+                onClick={() => removeFromFavorites(movie.id)}
+                style={{ marginBottom: "10px" }}
+                >
                 Remove from favorites
-            </button>
-            </section>
-        );
+                </Button>
+            </Card>
+            );
         })}
-    </article>
+        </div>
     </>
-);
+    );
 };
