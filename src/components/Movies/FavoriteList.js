@@ -1,85 +1,80 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import { styled } from "@mui/system";
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  maxWidth: 345,
+  margin: theme.spacing(1),
+  flexGrow: 1,
+}));
 
 export const UserFavoriteList = () => {
-    const [userFavoriteList, setUserFavoriteList] = useState([]);
-    const localReelRecUser = localStorage.getItem("reelRec_user");
-    const ReelRecUserObject = JSON.parse(localReelRecUser);
-    const navigate = useNavigate();
+  const [userFavoriteList, setUserFavoriteList] = useState([]);
+  const localReelRecUser = localStorage.getItem("reelRec_user");
+  const ReelRecUserObject = JSON.parse(localReelRecUser);
+  const navigate = useNavigate();
 
-useEffect(() => {
+  useEffect(() => {
     fetch(`http://localhost:8088/userWatchListAndFavorites?_expand=movie`)
-        .then((response) => response.json())
-        .then((favoriteListArray) => {
+      .then((response) => response.json())
+      .then((favoriteListArray) => {
         const filterFavoriteList = favoriteListArray.filter(
-            (item) =>
-                item.userId === ReelRecUserObject.id && item.favorite === true
+          (item) => item.userId === ReelRecUserObject.id && item.favorite === true
         );
         setUserFavoriteList(filterFavoriteList);
-        console.log(filterFavoriteList);
-        });
-    }, 
-    []
-);
+      });
+  }, []);
 
-const removeFromFavorites = (favoriteId) => {
+  const removeFromFavorites = (favoriteId) => {
     fetch(`http://localhost:8088/userWatchListAndFavorites/${favoriteId}`, {
-        method: "PATCH",
-        headers: {
+      method: "PATCH",
+      headers: {
         "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ favorite: false }),
+      },
+      body: JSON.stringify({ favorite: false }),
     }).then(() => {
-        const updatedFavorites = userFavoriteList.filter(
-        (item) => item.id !== favoriteId
-        );
-        setUserFavoriteList(updatedFavorites);
-        console.log("Movie removed from favorites");
+      const updatedFavorites = userFavoriteList.filter((item) => item.id !== favoriteId);
+      setUserFavoriteList(updatedFavorites);
+      console.log("Movie removed from favorites");
     });
-};
+  };
 
-return (
+  return (
     <>
-        <h2>Favorite List</h2>
-        <Button variant="contained" onClick={() => navigate("/")}>
+      <Typography variant="h3" align="center" style={{ marginTop: "20px" }}>
+        Favorites
+      </Typography>
+      <Button variant="contained" onClick={() => navigate("/")}>
         Home
-    </Button>
+      </Button>
 
-    <div className="movies" style={{ display: "flex", flexWrap: "wrap" }}>
-        {userFavoriteList.map((movie) => {
-            return (
-            <Card
-                key={`userFavoriteList--${movie.id}`}
-                sx={{ maxWidth: 345, margin: "10px" }}
-            >
-                <CardMedia
-                component="img"
-                height="140"
-                image={movie.movie.image}
-                alt={movie.movie.name}
-                />
-                <CardContent>
+      <Grid container spacing={2} style={{ marginTop: "10px" }}>
+        {userFavoriteList.map((favoriteItem) => (
+          <Grid item xs={12} sm={6} md={4} key={`favoriteItem--${favoriteItem.id}`}>
+            <StyledCard>
+              <CardMedia component="img" height="100%" image={favoriteItem.movie.image} alt={favoriteItem.movie.name} />
+              <CardContent>
                 <Typography variant="h6" align="center" gutterBottom>
-                    {movie.movie.name}
+                  {favoriteItem.movie.name}
                 </Typography>
                 <Typography variant="body2" align="center">
-                    Description: {movie.movie.description}
+                {favoriteItem.movie.description}
                 </Typography>
-                </CardContent>
-                <Button
+              </CardContent>
+              <Button
                 variant="contained"
                 color="error"
                 size="small"
-                onClick={() => removeFromFavorites(movie.id)}
+                onClick={() => removeFromFavorites(favoriteItem.id)}
                 style={{ marginBottom: "10px" }}
-                >
+              >
                 Remove from favorites
-                </Button>
-            </Card>
-            );
-        })}
-        </div>
+              </Button>
+            </StyledCard>
+          </Grid>
+        ))}
+      </Grid>
     </>
-    );
+  );
 };

@@ -36,7 +36,9 @@ export const UserWatchList = () => {
 
   return (
     <>
-      <h2>Watch List</h2>
+      <Typography variant="h3" align="center" style={{ marginTop: "20px" }}>
+        Watch List
+      </Typography>
       <Button onClick={() => navigate("/")}>Home</Button>
 
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
