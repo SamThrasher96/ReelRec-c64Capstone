@@ -16,7 +16,7 @@ export const RandomMovieDetails = () => {
   }, [movieId]);
 
   return (
-    <Card sx={{ maxWidth: 650, margin: "auto" }}>
+    <Card sx={{ maxWidth: 650, margin: "auto", marginTop: 5 }}>
       <CardMedia component="img" height={600} width={300} image={randomlySelectedMovie.image} alt={randomlySelectedMovie.name} />
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
