@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardMedia, Button, Grid, Typography, CardActions } from "@mui/material";
+import { Card, CardContent, CardMedia, Button, Grid, Typography } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const UserWatchList = () => {
@@ -41,7 +41,7 @@ export const UserWatchList = () => {
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
         {userWatchList.map((watchListItem) => (
           <Grid item xs={12} sm={6} md={4} key={`watchListItem--${watchListItem.id}`}>
-            <Card sx={{ height: "100%", display: "flex", flexDirection: "column", margin: "10px" }}>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column", margin: "10px", position: "relative" }}>
               <CardMedia component="img" height="650" image={watchListItem.movie.image} alt={watchListItem.movie.name} />
               <CardContent>
                 <Typography variant="h6" align="center" gutterBottom>
@@ -50,18 +50,17 @@ export const UserWatchList = () => {
                 <Typography variant="body2" align="center">
                   {watchListItem.movie.description}
                 </Typography>
-              </CardContent>
-              <CardActions sx={{ justifyContent: "center" }}>
                 <Button
                   variant="contained"
                   color="error"
                   size="small"
                   startIcon={<DeleteOutlineIcon />}
                   onClick={() => removeFromWatchList(watchListItem.id)}
-                >
+                  style={{ position: "absolute", bottom: "10px", left: "50%", transform: "translateX(-50%)" }}
+                  >
                   Remove from Watch List
                 </Button>
-              </CardActions>
+                </CardContent>
             </Card>
           </Grid>
         ))}

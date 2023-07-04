@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
-import { styled } from "@mui/system";
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  maxWidth: 345,
-  margin: theme.spacing(1),
-  flexGrow: 1,
-}));
 
 export const UserFavoriteList = () => {
   const [userFavoriteList, setUserFavoriteList] = useState([]);
@@ -47,26 +40,26 @@ export const UserFavoriteList = () => {
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
         {userFavoriteList.map((favoriteItem) => (
           <Grid item xs={12} sm={6} md={4} key={`favoriteItem--${favoriteItem.id}`}>
-            <StyledCard>
-              <CardMedia component="img" height="100%" image={favoriteItem.movie.image} alt={favoriteItem.movie.name} />
-              <CardContent>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column", margin: "10px", position: "relative" }}>
+              <CardMedia component="img" height="650" image={favoriteItem.movie.image} alt={favoriteItem.movie.name} />
+              <CardContent style={{ flexGrow: 1 }}>
                 <Typography variant="h6" align="center" gutterBottom>
                   {favoriteItem.movie.name}
                 </Typography>
-                <Typography variant="body2" align="center">
-                {favoriteItem.movie.description}
+                <Typography variant="body2" align="center" style={{ marginBottom: "10px" }}>
+                  {favoriteItem.movie.description}
                 </Typography>
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  onClick={() => removeFromFavorites(favoriteItem.id)}
+                  style={{ position: "absolute", bottom: "10px", left: "50%", transform: "translateX(-50%)" }}
+                >
+                  Remove from favorites
+                </Button>
               </CardContent>
-              <Button
-                variant="contained"
-                color="error"
-                size="small"
-                onClick={() => removeFromFavorites(favoriteItem.id)}
-                style={{ marginBottom: "10px" }}
-              >
-                Remove from favorites
-              </Button>
-            </StyledCard>
+            </Card>
           </Grid>
         ))}
       </Grid>
