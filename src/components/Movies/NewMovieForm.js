@@ -82,7 +82,6 @@ useEffect(
 return (
     <form className="newMovieForm">
     <h2 className="movieForm_title">New Movie Addition</h2>
-    <button onClick={() => navigate("/")}>Home</button>
     <fieldset>
         <div className="form-group">
             <label htmlFor="name">Name</label>

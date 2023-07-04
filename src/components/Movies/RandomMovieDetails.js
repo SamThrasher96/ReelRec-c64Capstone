@@ -35,7 +35,6 @@ export const RandomMovieDetails = () => {
           {randomlySelectedMovie.description}
         </Typography>
       </CardContent>
-      <button onClick={() => navigate("/")}>Home</button>
     </Card>
   );
 };

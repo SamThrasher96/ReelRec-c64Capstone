@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Rating } from "@mui/material";
 import "./movie.css";
 import { Button, Card, CardContent, CardMedia, Grid, Typography, CardActions } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -6,6 +7,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 export const MovieList = ({ searchTermState }) => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [ratingValue, setRatingValue] = useState()
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
 
@@ -83,6 +85,27 @@ export const MovieList = ({ searchTermState }) => {
       });
   };
 
+  const addRatings = (movieId) => {
+    const userId = ReelRecUserObject.id;
+    const ratingObject = {
+      movieId: movieId,
+      userId: userId,
+      rating: ratingValue
+    };
+
+    fetch(`http://localhost:8088/ratings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(ratingObject)
+    }) 
+    .then(response => response.json())
+      .then(() => {
+        console.log("Movie rated");
+      });
+  }
+
   return (
     <>
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
@@ -111,6 +134,16 @@ export const MovieList = ({ searchTermState }) => {
                 <Typography variant="body2" align="center">
                   {movie.description}
                 </Typography>
+                <Rating 
+                name="movieRating"
+                value={ratingValue}
+                onChange={( value) => setRatingValue(value)}
+                precision={0.5}
+                >
+                  <Typography>
+                    Rated {ratingValue !== undefined ? ratingValue : 0} stars
+                  </Typography>
+                  </Rating>
               </CardContent>
               <CardActions sx={{ justifyContent: "center"}}>
                 <Button

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardMedia, Button, Grid, Typography, CardActions } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const UserWatchList = () => {
   const [userWatchList, setUserWatchList] = useState([]);
-  const navigate = useNavigate();
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
 
@@ -39,7 +37,6 @@ export const UserWatchList = () => {
       <Typography variant="h3" align="center" style={{ marginTop: "20px" }}>
         Watch List
       </Typography>
-      <Button onClick={() => navigate("/")}>Home</Button>
 
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
         {userWatchList.map((watchListItem) => (

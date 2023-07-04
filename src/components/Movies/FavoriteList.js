@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -13,7 +12,6 @@ export const UserFavoriteList = () => {
   const [userFavoriteList, setUserFavoriteList] = useState([]);
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8088/userWatchListAndFavorites?_expand=movie`)
@@ -45,9 +43,6 @@ export const UserFavoriteList = () => {
       <Typography variant="h3" align="center" style={{ marginTop: "20px" }}>
         Favorites
       </Typography>
-      <Button variant="contained" onClick={() => navigate("/")}>
-        Home
-      </Button>
 
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
         {userFavoriteList.map((favoriteItem) => (

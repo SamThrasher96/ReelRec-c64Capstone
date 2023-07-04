@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Avatar, Box, Menu, MenuItem, IconButton } from "@mui/material";
+import React from 'react';
+import { AppBar, Toolbar, Avatar, Box, Menu, MenuItem, IconButton, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -33,7 +33,15 @@ export const Layout = ({ children }) => {
         {isLoggedIn && (
           <AppBar position="static" color="primary">
             <Toolbar>
-              <Typography variant="h6">ReelRec</Typography>
+              <Button
+                component={Link}
+                to="/"
+                color="inherit"
+                variant="text"
+                size="large"
+              >
+                ReelRec
+              </Button>
               <Box flexGrow={1} />
               <IconButton
                 color="inherit"

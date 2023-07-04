@@ -18,7 +18,6 @@ export const UserProfile = () => {
 
   return (
     <>
-      <button onClick={() => navigate("/")}>Home</button>
       <section className="user">
         {users.map((user) => {
           return (
