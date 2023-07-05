@@ -8,6 +8,7 @@ import {
   Paper,
   TextField,
   Typography,
+  Alert,
 } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -22,6 +23,7 @@ export const EditUserProfile = () => {
     email: "",
     profilePic: "",
   });
+  const [showAlert, setShowAlert] = useState(false); // State for success alert
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export const EditUserProfile = () => {
   const handleSaveButtonClick = (event) => {
     event.preventDefault();
 
-    return fetch(`http://localhost:8088/users/${userId}`, {
+    fetch(`http://localhost:8088/users/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +47,11 @@ export const EditUserProfile = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        navigate("/User");
+        setShowAlert(true); 
+        setTimeout(() => {
+          setShowAlert(false); 
+          navigate("/User");
+        }, 2500);
       });
   };
 
@@ -60,7 +66,12 @@ export const EditUserProfile = () => {
     >
       <Grid item>
         <Paper elevation={3} sx={{ padding: "2rem", width: "400px" }}>
-          <Typography variant="h4" component="h2" align="center">
+          <Typography
+            variant="h4"
+            component="h2"
+            align="center"
+            marginBottom={"15px"}
+          >
             Edit User Info
           </Typography>
           <FormContainer item>
@@ -129,8 +140,15 @@ export const EditUserProfile = () => {
               Save Profile
             </Button>
           </FormContainer>
+          {/* Success Alert */}
+          {showAlert && (
+            <Alert severity="success" sx={{ marginTop: "1rem" }}>
+              Your profile has been updated.
+            </Alert>
+          )}
         </Paper>
       </Grid>
     </Grid>
   );
 };
+
