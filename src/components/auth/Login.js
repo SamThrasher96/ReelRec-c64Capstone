@@ -32,14 +32,28 @@ export const Login = () => {
   };
 
   return (
-    <Container style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <Container
+      style={{
+        minHeight: "90vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        maxWidth: "900px",
+        maxHeight: "1000px"
+      }}
+    >
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={8} md={6}>
-          <form style={{ width: "100%", maxWidth: "400px", padding: "16px", boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px", borderRadius: "4px", backgroundColor: "#ffffff" }} onSubmit={handleLogin}>
-            <img src="./images/ReelRecLogo.png" alt="ReelRec Logo" className="logo-image" />
-            <Typography variant="h5" component="h1" style={{ marginBottom: "16px" }}>
-              ReelRec
-            </Typography>
+          <form
+            style={{
+              width: "600px",
+              padding: "16px",
+              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+              borderRadius: "4px",
+            }}
+            onSubmit={handleLogin}
+          >
+            <img src="../images/ReelRecLogo.png" alt="ReelRec Logo" className="logo-image" />
             <TextField
               type="email"
               value={email}
@@ -76,4 +90,3 @@ export const Login = () => {
     </Container>
   );
 };
-

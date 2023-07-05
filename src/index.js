@@ -1,16 +1,35 @@
-import { ReelRec } from "./components/ReelRec"
-import { createRoot } from "react-dom/client"
-import "./index.css"
-import { BrowserRouter } from "react-router-dom"
-import { Layout } from "./components/Layout"
+import { ReelRec } from "./components/ReelRec";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const container = document.getElementById("root")
-const root = createRoot(container)
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#EC6938",
+      dark: "#FF0000",
+    },
+    secondary: {
+      main: "#FFFFE2",
+      dark: "#808071",
+    },
+    mode: "light", // Set the default mode to light
+  },
+});
+
+const container = document.getElementById("root");
+const root = createRoot(container);
 root.render(
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <BrowserRouter>
-        <Layout>
+      <Layout>
         <ReelRec />
-        </Layout>
+      </Layout>
     </BrowserRouter>
-)
+  </ThemeProvider>
+);
 

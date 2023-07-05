@@ -10,14 +10,15 @@ import {
   Typography,
   CardActions,
   useTheme,
+  Box
 } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { MovieRatings } from "./Ratings";
 
 export const MovieList = ({ searchTermState }) => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [ratingValue, setRatingValue] = useState();
   const [showScroll, setShowScroll] = useState(false);
   const localReelRecUser = localStorage.getItem("reelRec_user");
   const ReelRecUserObject = JSON.parse(localReelRecUser);
@@ -37,9 +38,9 @@ export const MovieList = ({ searchTermState }) => {
       });
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+useEffect(() => {
+  getMovies();
+}, []);
 
   useEffect(() => {
     const searchedMovies = movies.filter((movie) => {
@@ -58,6 +59,7 @@ export const MovieList = ({ searchTermState }) => {
       watchList: true,
       favorite: false,
     };
+    
 
     fetch("http://localhost:8088/userWatchListAndFavorites", {
       method: "POST",
@@ -100,27 +102,6 @@ export const MovieList = ({ searchTermState }) => {
     })
       .then(() => {
         getMovies();
-      });
-  };
-
-  const addRatings = (movieId) => {
-    const userId = ReelRecUserObject.id;
-    const ratingObject = {
-      movieId: movieId,
-      userId: userId,
-      rating: ratingValue,
-    };
-
-    fetch("http://localhost:8088/ratings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ratingObject),
-    })
-      .then((response) => response.json())
-      .then(() => {
-        console.log("Movie rated");
       });
   };
 
@@ -176,16 +157,7 @@ export const MovieList = ({ searchTermState }) => {
                 <Typography variant="body2" align="center">
                   {movie.description}
                 </Typography>
-                <Rating
-                  name="movieRating"
-                  value={ratingValue}
-                  onChange={(value) => setRatingValue(value)}
-                  precision={0.5}
-                >
-                  <Typography>
-                    Rated {ratingValue !== undefined ? ratingValue : 0} stars
-                  </Typography>
-                </Rating>
+              
               </CardContent>
               <CardActions sx={{ justifyContent: "center" }}>
                 <Button

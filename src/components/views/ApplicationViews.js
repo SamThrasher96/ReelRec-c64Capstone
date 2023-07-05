@@ -20,7 +20,7 @@ const Home = () => {
         alt="ReelRec Logo"
         className="logo-image"
       />
-      <Typography variant="h5" color="InfoText" align="center" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         What are we watching next?
       </Typography>
       {location.pathname === "/" && <RandomMovieGenerator />}
