@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
-import "./Login.css";
+import { Button, TextField, Typography, Grid, Container } from "@mui/material";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,35 +32,48 @@ export const Login = () => {
   };
 
   return (
-    <main className="container--login">
-      <section>
-        <form className="form--login" onSubmit={handleLogin}>
-          <h1>ReelRec</h1>
-          <h2>Please sign in</h2>
-          <fieldset>
+    <Container style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} sm={8} md={6}>
+          <form style={{ width: "100%", maxWidth: "400px", padding: "16px", boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px", borderRadius: "4px", backgroundColor: "#ffffff" }} onSubmit={handleLogin}>
+            <img src="./images/ReelRecLogo.png" alt="ReelRec Logo" className="logo-image" />
+            <Typography variant="h5" component="h1" style={{ marginBottom: "16px" }}>
+              ReelRec
+            </Typography>
             <TextField
               type="email"
               value={email}
               onChange={(evt) => setEmail(evt.target.value)}
-              className="form-control"
               label="Email address"
               color="primary"
               variant="outlined"
+              fullWidth
               required
               autoFocus
             />
-          </fieldset>
-          <fieldset>
-            <Button variant="contained" type="submit" color="success">
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              fullWidth
+              style={{ marginTop: "16px" }}
+            >
               Sign in
             </Button>
-          </fieldset>
-        </form>
-      </section>
-      <section className="link--register">
-        <Link to="/register">Not a user yet?</Link>
-      </section>
-    </main>
+            <Button
+              component={Link}
+              to="/register"
+              variant="contained"
+              color="primary"
+              fullWidth
+              style={{ marginTop: "16px" }}
+            >
+              Register
+            </Button>
+          </form>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

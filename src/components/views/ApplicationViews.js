@@ -8,7 +8,6 @@ import { RandomMovieGenerator } from "../Movies/RandomMovies"
 import { Typography } from "@mui/material"
 import { UserWatchList } from "../Movies/WatchList"
 import { UserFavoriteList } from "../Movies/FavoriteList"
-
 import "./ApplicationViews.css"
 
 const Home = () => {
