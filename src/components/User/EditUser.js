@@ -51,7 +51,11 @@ export const EditUserProfile = () => {
         setTimeout(() => {
           setShowAlert(false); 
           navigate("/User");
-        }, 2500);
+        }, 1000);
+        const localReelRecUser = localStorage.getItem("reelRec_user");
+        const ReelRecUserObject = JSON.parse(localReelRecUser);
+        ReelRecUserObject.profilePic = profile.profilePic;
+        localStorage.setItem("reelRec_user", JSON.stringify(ReelRecUserObject));
       });
   };
 
