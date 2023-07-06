@@ -15,7 +15,7 @@ export const UserFavoriteList = () => {
         );
         setUserFavoriteList(filterFavoriteList);
       });
-  }, []);
+  }, [ReelRecUserObject.id]);
 
   const removeFromFavorites = (favoriteId) => {
     fetch(`http://localhost:8088/userWatchListAndFavorites/${favoriteId}`, {

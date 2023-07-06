@@ -14,7 +14,7 @@ export const UserProfile = () => {
       .then((userData) => {
         setUser(userData);
       });
-  }, []);
+  }, [reelRecUserObject.id]);
 
   return (
     <>

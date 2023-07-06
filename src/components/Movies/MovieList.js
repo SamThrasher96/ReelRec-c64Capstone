@@ -9,8 +9,7 @@ import {
   Grid,
   Typography,
   CardActions,
-  useTheme,
-  Box
+  useTheme
 } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -48,7 +47,7 @@ useEffect(() => {
         .startsWith(searchTermState.toLowerCase());
     });
     setFilteredMovies(searchedMovies);
-  }, [searchTermState]);
+  }, [movies,searchTermState]);
 
   const addToWatchList = (movieId) => {
     const userId = ReelRecUserObject.id;

@@ -61,13 +61,13 @@ export const RandomMovieGenerator = () => {
 
   const generateRandomMovie = () => {
     let filteredMovies = movies;
-    if (filterCategory && filterValue) {
+    if (filterCategory && filterValue) { // eslint-disable-next-line
       filteredMovies = movies.filter(movie => {
-        if (filterCategory === "genre") {
+        if (filterCategory === "genre") { // eslint-disable-next-line
           return movie.genreId == filterValue
-        } else if (filterCategory === "streamingService") {
+        } else if (filterCategory === "streamingService") { // eslint-disable-next-line
           return movie.streamingServiceId == filterValue
-        } else if (filterCategory === "mpaRating") {
+        } else if (filterCategory === "mpaRating") { // eslint-disable-next-line
           return movie.mpaRatingId == filterValue
         }
       })

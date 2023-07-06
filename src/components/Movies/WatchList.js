@@ -16,7 +16,7 @@ export const UserWatchList = () => {
         );
         setUserWatchList(filteredWatchList);
       });
-  }, []);
+  }, [ReelRecUserObject.id]);
 
   const removeFromWatchList = (watchListId) => {
     fetch(`http://localhost:8088/userWatchListAndFavorites/${watchListId}`, {
