@@ -42,10 +42,8 @@ export const Register = () => {
       .then((res) => res.json())
       .then((response) => {
         if (response.length > 0) {
-          // Duplicate email. No good.
           window.alert("Account with that email address already exists");
         } else {
-          // Good email, create user.
           registerNewUser();
         }
       });

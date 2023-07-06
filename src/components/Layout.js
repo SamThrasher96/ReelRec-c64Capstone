@@ -9,7 +9,6 @@ import {
   MenuItem,
   IconButton,
   Typography,
-  Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -75,6 +74,9 @@ export const Layout = ({ children }) => {
                 ReelRec
               </Typography>
               <Box flexGrow={1} />
+              <IconButton color="inherit" onClick={toggleDarkMode}>
+                {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
+              </IconButton>
               <IconButton
                 color="inherit"
                 onClick={(e) => setMenuAnchor(e.currentTarget)}
@@ -111,9 +113,7 @@ export const Layout = ({ children }) => {
                   Logout
                 </MenuItem>
               </Menu>
-              <IconButton color="inherit" onClick={toggleDarkMode}>
-                {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
-              </IconButton>
+              
             </Toolbar>
         </ThemeProvider>
         </AppBar>

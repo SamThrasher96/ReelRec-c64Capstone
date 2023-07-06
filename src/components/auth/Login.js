@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField, Typography, Grid, Container } from "@mui/material";
+import { Button, TextField, Grid, Container } from "@mui/material";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

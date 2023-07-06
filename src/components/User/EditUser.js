@@ -23,7 +23,7 @@ export const EditUserProfile = () => {
     email: "",
     profilePic: "",
   });
-  const [showAlert, setShowAlert] = useState(false); // State for success alert
+  const [showAlert, setShowAlert] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -140,7 +140,6 @@ export const EditUserProfile = () => {
               Save Profile
             </Button>
           </FormContainer>
-          {/* Success Alert */}
           {showAlert && (
             <Alert severity="success" sx={{ marginTop: "1rem" }}>
               Your profile has been updated.

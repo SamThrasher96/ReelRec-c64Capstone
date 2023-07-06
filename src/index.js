@@ -16,7 +16,7 @@ const theme = createTheme({
       main: "#FFFFE2",
       dark: "#808071",
     },
-    mode: "light", // Set the default mode to light
+    mode: "light",
   },
 });
 

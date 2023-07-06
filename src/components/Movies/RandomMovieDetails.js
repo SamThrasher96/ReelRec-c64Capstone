@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export const RandomMovieDetails = () => {
   const { movieId } = useParams();
   const [randomlySelectedMovie, updateRandomlySelectedMovie] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8088/movies/${movieId}?_expand=genre&_expand=mpaRating&_expand=streamingService`)

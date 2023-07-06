@@ -27,7 +27,7 @@ export const UserProfile = () => {
                   border: "1px solid",
                   borderColor: "primary.main",
                   borderRadius: "20px",
-                  width: "400px", // Adjust the width as desired
+                  width: "400px"
                 }}
               >
                 <CardContent>

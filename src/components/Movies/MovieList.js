@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Rating, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import "./movie.css";
 import {
   Button,
@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { MovieRatings } from "./Ratings";
 
 export const MovieList = ({ searchTermState }) => {
   const [movies, setMovies] = useState([]);
@@ -157,18 +156,8 @@ useEffect(() => {
                 <Typography variant="body2" align="center">
                   {movie.description}
                 </Typography>
-              
               </CardContent>
               <CardActions sx={{ justifyContent: "center" }}>
-                <Button
-                  variant="contained"
-                  color="error"
-                  size="small"
-                  startIcon={<DeleteOutlineIcon />}
-                  onClick={() => deleteButton(movie.id)}
-                >
-                  Delete Movie
-                </Button>
                 <Button
                   variant="contained"
                   color="primary"
@@ -184,6 +173,15 @@ useEffect(() => {
                   onClick={() => addToFavoriteList(movie.id)}
                 >
                   Add to Favorite List
+                </Button>
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  startIcon={<DeleteOutlineIcon />}
+                  onClick={() => deleteButton(movie.id)}
+                >
+                  Delete Movie
                 </Button>
               </CardActions>
             </Card>
