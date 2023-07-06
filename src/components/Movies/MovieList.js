@@ -167,7 +167,7 @@ useEffect(() => {
                 </Button>
                 <Button
                   variant="contained"
-                  color="warning"
+                  color="secondary"
                   size="small"
                   onClick={() => addToFavoriteList(movie.id)}
                 >
@@ -175,7 +175,7 @@ useEffect(() => {
                 </Button>
                 <Button
                   variant="contained"
-                  color="error"
+                  color="primary"
                   size="small"
                   startIcon={<DeleteOutlineIcon />}
                   onClick={() => deleteButton(movie.id)}
